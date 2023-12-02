@@ -62,9 +62,7 @@ class GoogleAuth:
 
     def LoadCredentialsFile(self, cred_file: str) -> None:
         if not os.path.isfile(cred_file):
-            raise NoCredentialFile(
-                "No credential file named {} is found.".format(cred_file)
-            )
+            raise NoCredentialFile(f"No credential file named {cred_file} is found.")
         storage = Storage(cred_file)
         self.credentials = storage.get()
 

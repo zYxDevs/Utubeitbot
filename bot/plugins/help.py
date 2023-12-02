@@ -14,22 +14,25 @@ from ..utubebot import UtubeBot
 
 def map_btns(pos):
     if pos == 1:
-        button = [[InlineKeyboardButton(text="-->", callback_data="help+2")]]
+        return [[InlineKeyboardButton(text="-->", callback_data="help+2")]]
     elif pos == len(tr.HELP_MSG) - 1:
         auth = GoogleAuth(Config.CLIENT_ID, Config.CLIENT_SECRET)
         url = auth.GetAuthUrl()
-        button = [
+        return [
             [InlineKeyboardButton(text="<--", callback_data=f"help+{pos-1}")],
             [InlineKeyboardButton(text="Login URL", url=url)],
         ]
     else:
-        button = [
+        return [
             [
-                InlineKeyboardButton(text="<--", callback_data=f"help+{pos-1}"),
-                InlineKeyboardButton(text="-->", callback_data=f"help+{pos+1}"),
+                InlineKeyboardButton(
+                    text="<--", callback_data=f"help+{pos-1}"
+                ),
+                InlineKeyboardButton(
+                    text="-->", callback_data=f"help+{pos+1}"
+                ),
             ],
         ]
-    return button
 
 
 @UtubeBot.on_message(

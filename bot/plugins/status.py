@@ -71,7 +71,7 @@ def humanbytes(size):
     while size > power:
         size /= power
         n += 1
-    return str(round(size, 2)) + " " + Dic_powerN[n] + "B"
+    return f"{str(round(size, 2))} {Dic_powerN[n]}B"
 
 def up_time(time_taken):
     hours, _hour = divmod(time_taken, 3600)
@@ -83,6 +83,4 @@ def time_format(val):
     val = str(val)
     if len(val) == 1:
         val = f"0{val}"
-    else:
-        pass
     return val
