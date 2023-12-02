@@ -11,28 +11,37 @@ from pyrogram.types import (
 from ..utubebot import UtubeBot
 
 def map(pos):
-    if(pos==1):
-        button = [
-            [InlineKeyboardButton(text = '-->', callback_data = "update+2")]
-        ]
-    elif(pos==len(tr.UPDATE_MSG)-1):
+    if (pos==1):
+        return [[InlineKeyboardButton(text='-->', callback_data="update+2")]]
+    elif (pos==len(tr.UPDATE_MSG)-1):
 
-        button = [
-        [
-            InlineKeyboardButton(text = 'Support Chat', url = Config.SUPPORT_CHAT_LINK),
-            InlineKeyboardButton(text = 'Feature Request', url = "https://github.com/oVo-HxBots/Utubeitbot/issues/new")
+        return [
+            [
+                InlineKeyboardButton(
+                    text='Support Chat', url=Config.SUPPORT_CHAT_LINK
+                ),
+                InlineKeyboardButton(
+                    text='Feature Request',
+                    url="https://github.com/oVo-HxBots/Utubeitbot/issues/new",
+                ),
             ],
-            [InlineKeyboardButton(text = '<--', callback_data = f"update+{pos-1}")]
-          
+            [
+                InlineKeyboardButton(
+                    text='<--', callback_data=f"update+{pos-1}"
+                )
+            ],
         ]
     else:
-        button = [
+        return [
             [
-                InlineKeyboardButton(text = '<--', callback_data = f"update+{pos-1}"),
-                InlineKeyboardButton(text = '-->', callback_data = f"update+{pos+1}")
+                InlineKeyboardButton(
+                    text='<--', callback_data=f"update+{pos-1}"
+                ),
+                InlineKeyboardButton(
+                    text='-->', callback_data=f"update+{pos+1}"
+                ),
             ],
         ]
-    return button
 
 @UtubeBot.on_message(filters.private & filters.incoming & filters.command(['update', 'up']), group=2)
 async def _update(c: UtubeBot, m: Message):

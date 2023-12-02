@@ -24,12 +24,10 @@ class Database:
         return bool(user)
 
     async def total_users_count(self):
-        count = await self.col.count_documents({})
-        return count
+        return await self.col.count_documents({})
 
     async def get_all_users(self):
-        all_users = self.col.find({})
-        return all_users
+        return self.col.find({})
 
     async def delete_user(self, user_id):
         await self.col.delete_many({'_id': int(user_id)})

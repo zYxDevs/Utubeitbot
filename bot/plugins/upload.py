@@ -69,8 +69,6 @@ async def _upload(c: UtubeBot, m: Message):
         await snt.edit_text("Downloaded to local, Now starting to upload to youtube...")
     except Exception as e:
         log.warning(e, exc_info=True)
-        pass
-
     title = " ".join(m.command[1:])
     upload = Uploader(file, title)
     status, link = await upload.start(progress, snt)
@@ -83,7 +81,7 @@ async def _upload(c: UtubeBot, m: Message):
 
 def get_download_id(storage: dict) -> str:
     while True:
-        download_id = "".join([random.choice(string.ascii_letters) for i in range(3)])
+        download_id = "".join([random.choice(string.ascii_letters) for _ in range(3)])
         if download_id not in storage:
             break
     return download_id
@@ -109,9 +107,7 @@ def human_bytes(
     sufix_list = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     for unit in sufix_list:
         if abs(num) < base:
-            if split:
-                return round(num, 2), unit
-            return f"{round(num, 2)} {unit}"
+            return (round(num, 2), unit) if split else f"{round(num, 2)} {unit}"
         num /= base
 
 
@@ -149,4 +145,3 @@ async def progress(
 
     except Exception as e:
         log.info(e)
-        pass

@@ -5,6 +5,8 @@ import datetime
 id_pattern = re.compile(r'^.\d+$') 
 
 
+
+
 class Config:
 
     BOT_TOKEN = os.environ.get("BOT_TOKEN")
@@ -22,7 +24,7 @@ class Config:
     BOT_OWNER = int(os.environ.get("BOT_OWNER"))
 
     BOT_START_TIME = time.time()
-    
+
     BOT_START_DATETIME = datetime.datetime.now().strftime("%B %d, %Y %I:%M:%S %p")
 
     DB_NAME = os.environ.get("DB_NAME", "Utubeitbot")  
@@ -51,8 +53,7 @@ class Config:
 
     DEBUG = bool(os.environ.get("DEBUG"))
 
-    UPLOAD_MODE = os.environ.get("UPLOAD_MODE") or False
-    if UPLOAD_MODE:
+    if UPLOAD_MODE := os.environ.get("UPLOAD_MODE") or False:
         if UPLOAD_MODE.lower() in ["private", "public", "unlisted"]:
             UPLOAD_MODE = UPLOAD_MODE.lower()
         else:
